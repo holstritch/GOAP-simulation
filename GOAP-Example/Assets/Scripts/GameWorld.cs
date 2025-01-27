@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameWorld 
 {
-    private static readonly GameWorld gameWorld = new GameWorld();
+    private static readonly GameWorld gameWorldInstance = new GameWorld();
     private static WorldStates world;
 
     static GameWorld()
@@ -20,7 +20,7 @@ public class GameWorld
 
     public static GameWorld Instance
     {
-        get { return Instance; }
+        get { return gameWorldInstance; }
     }
 
     public WorldStates GetWorld()
