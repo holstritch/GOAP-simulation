@@ -62,14 +62,4 @@ public abstract class GameAction : MonoBehaviour
     public abstract bool PrePerform();
     public abstract bool PostPerform();
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

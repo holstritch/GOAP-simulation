@@ -21,7 +21,7 @@ public class Node
 }
 public class GamePlanner : MonoBehaviour
 {
-    public Queue<GameAction> plan(List<GameAction> actions, Dictionary<string, int> goal, WorldStates states)
+    public Queue<GameAction> Plan(List<GameAction> actions, Dictionary<string, int> goal, WorldStates states)
     {
         // find which action is usable
         List<GameAction> usableActions = new List<GameAction>();
