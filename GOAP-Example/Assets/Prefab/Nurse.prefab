@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 177407082141715887}
   - component: {fileID: 4047995493616609364}
-  - component: {fileID: 8252615044135993021}
+  - component: {fileID: 2609357030645959627}
   - component: {fileID: 6902065011407448298}
   m_Layer: 0
   m_Name: Nurse
@@ -89,7 +89,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8252615044135993021
+--- !u!114 &2609357030645959627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2618188073631541129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db7452e1f1226314281449429201d241, type: 3}
+  m_Script: {fileID: 11500000, guid: ee04dc68f5b7a9a4781d96398d9b0ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actions: []
@@ -120,7 +120,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: 
-  duration: 0
+  duration: 5
   preConditions:
   - key: patientWaiting
     value: 1
