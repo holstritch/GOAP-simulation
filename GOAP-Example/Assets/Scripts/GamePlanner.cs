@@ -19,7 +19,7 @@ public class Node
         this.action = action;
     }
 }
-public class GamePlanner : MonoBehaviour
+public class GamePlanner
 {
     public Queue<GameAction> Plan(List<GameAction> actions, Dictionary<string, int> goal, WorldStates states)
     {

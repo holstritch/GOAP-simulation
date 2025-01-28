@@ -51,7 +51,7 @@ public abstract class GameAction : MonoBehaviour
 
     public bool IsAchieveableGiven(Dictionary<string, int> conditions)
     {
-        foreach(KeyValuePair<string, int> kvp in conditions)
+        foreach(KeyValuePair<string, int> kvp in preConditionsDic)
         {
             if (!conditions.ContainsKey(kvp.Key))
                 return false;
