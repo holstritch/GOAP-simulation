@@ -1,133 +1,134 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
 using System.Linq;
+using UnityEngine;
 
-public class SubGoal
+namespace Agents
 {
-    public Dictionary<string, int> SubGoals;
-    public bool remove;
-
-    public SubGoal(string goalName, int value, bool isRemoving)
+    public class SubGoal
     {
-        SubGoals = new Dictionary<string, int>();
-        SubGoals.Add(goalName, value);
-        remove = isRemoving;
-    }
-}
-public class Agent : MonoBehaviour
-{
-    public List<GameAction> actions =  new List<GameAction>();
-    public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
-    public GameAction currentAction;
-    public float distanceToCompleteWaypoint = 1f;
-    
-    GamePlanner _planner;
-    Queue<GameAction> _actionQueue;
-    SubGoal _currentGoal;
-    bool _invoked = false;
+        public Dictionary<string, int> SubGoals;
+        public bool remove;
 
-    void CompleteAction()
-    {
-        currentAction.running = false;
-        currentAction.PostPerform();
-        _invoked = false;
-    }
-
-    protected void Start()
-    {
-        GameAction[] acts = this.GetComponents<GameAction>();
-
-        foreach (GameAction act in acts) 
-        { 
-            actions.Add(act);
+        public SubGoal(string goalName, int value, bool isRemoving)
+        {
+            SubGoals = new Dictionary<string, int>();
+            SubGoals.Add(goalName, value);
+            remove = isRemoving;
         }
     }
-
-    private void LateUpdate()
+    public class Agent : MonoBehaviour
     {
-        HandleRunningAction();
-        if (currentAction != null && currentAction.running) return;
+        public List<GameAction> actions =  new List<GameAction>();
+        public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
+        public GameAction currentAction;
+        public float distanceToCompleteWaypoint = 1f;
+    
+        GamePlanner _planner;
+        Queue<GameAction> _actionQueue;
+        SubGoal _currentGoal;
+        bool _invoked = false;
+
+        void CompleteAction()
+        {
+            currentAction.running = false;
+            currentAction.PostPerform();
+            _invoked = false;
+        }
+
+        protected void Start()
+        {
+            GameAction[] acts = this.GetComponents<GameAction>();
+
+            foreach (GameAction act in acts) 
+            { 
+                actions.Add(act);
+            }
+        }
+
+        private void LateUpdate()
+        {
+            HandleRunningAction();
+            if (currentAction != null && currentAction.running) return;
         
-        CreatePlanner();
-        HandleEmptyActionQueue();
-        HandleNextAction(); 
-    }
+            CreatePlanner();
+            HandleEmptyActionQueue();
+            HandleNextAction(); 
+        }
     
-    private void HandleRunningAction()
-    {
-        if (currentAction != null && currentAction.running)
+        private void HandleRunningAction()
         {
-            // already performing a plan
-            if (currentAction.agent.hasPath && currentAction.agent.remainingDistance < distanceToCompleteWaypoint) // navmesh 
+            if (currentAction != null && currentAction.running)
             {
-                if (!_invoked)
+                // already performing a plan
+                if (currentAction.agent.hasPath && currentAction.agent.remainingDistance < distanceToCompleteWaypoint) // navmesh 
                 {
-                    Invoke("CompleteAction", currentAction.duration);
-                    _invoked = true;
+                    if (!_invoked)
+                    {
+                        Invoke("CompleteAction", currentAction.duration);
+                        _invoked = true;
+                    }
                 }
             }
         }
-    }
 
-    private void CreatePlanner()
-    {
-        if (_planner == null || _actionQueue == null)
+        private void CreatePlanner()
         {
-            // no current plan, so create planner
-            _planner = new GamePlanner();
+            if (_planner == null || _actionQueue == null)
+            {
+                // no current plan, so create planner
+                _planner = new GamePlanner();
             
-            var sortedGoals = from entry in goals orderby entry.Value descending select entry;
+                var sortedGoals = from entry in goals orderby entry.Value descending select entry;
 
-            foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
-            {
-                // create plan from most important goal
-                _actionQueue = _planner.Plan(actions, subGoal.Key.SubGoals, null);
-                if (_actionQueue != null)
+                foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
                 {
-                    _currentGoal = subGoal.Key;
-                    break;
+                    // create plan from most important goal
+                    _actionQueue = _planner.Plan(actions, subGoal.Key.SubGoals, null);
+                    if (_actionQueue != null)
+                    {
+                        _currentGoal = subGoal.Key;
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    private void HandleEmptyActionQueue()
-    {
-        if (_actionQueue != null && _actionQueue.Count == 0)
+        private void HandleEmptyActionQueue()
         {
-            // have run out of actions
-            if (_currentGoal.remove)
+            if (_actionQueue != null && _actionQueue.Count == 0)
             {
-                // if goal is a removable goal
-                goals.Remove(_currentGoal);
+                // have run out of actions
+                if (_currentGoal.remove)
+                {
+                    // if goal is a removable goal
+                    goals.Remove(_currentGoal);
+                }
+                _planner = null; // triggers creating a planner on next loop
             }
-            _planner = null; // triggers creating a planner on next loop
         }
-    }
 
-    private void HandleNextAction()
-    {
-        if (_actionQueue != null && _actionQueue.Count > 0)
+        private void HandleNextAction()
         {
-            // have more actions in queue
-            currentAction = _actionQueue.Dequeue();
-            if (currentAction.PrePerform())
+            if (_actionQueue != null && _actionQueue.Count > 0)
             {
-                if (currentAction.target == null && currentAction.targetTag != "")
+                // have more actions in queue
+                currentAction = _actionQueue.Dequeue();
+                if (currentAction.PrePerform())
                 {
-                    currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
+                    if (currentAction.target == null && currentAction.targetTag != "")
+                    {
+                        currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
+                    }
+                    if (currentAction.target != null)
+                    {
+                        currentAction.running = true;
+                        currentAction.agent.SetDestination(currentAction.target.transform.position); // navmesh agent target
+                    }
                 }
-                if (currentAction.target != null)
+                else
                 {
-                    currentAction.running = true;
-                    currentAction.agent.SetDestination(currentAction.target.transform.position); // navmesh agent target
+                    _actionQueue = null; // triggers finding a new plan
                 }
-            }
-            else
-            {
-                _actionQueue = null; // triggers finding a new plan
             }
         }
     }
