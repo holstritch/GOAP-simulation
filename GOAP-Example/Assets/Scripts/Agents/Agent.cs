@@ -20,10 +20,11 @@ public class Agent : MonoBehaviour
 {
     public List<GameAction> actions =  new List<GameAction>();
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
-
+    public GameAction currentAction;
+    public float distanceToCompleteWaypoint = 1f;
+    
     GamePlanner _planner;
     Queue<GameAction> _actionQueue;
-    public GameAction currentAction;
     SubGoal _currentGoal;
     bool _invoked = false;
 
@@ -59,7 +60,7 @@ public class Agent : MonoBehaviour
         if (currentAction != null && currentAction.running)
         {
             // already performing a plan
-            if (currentAction.agent.hasPath && currentAction.agent.remainingDistance < 1f) // navmesh 
+            if (currentAction.agent.hasPath && currentAction.agent.remainingDistance < distanceToCompleteWaypoint) // navmesh 
             {
                 if (!_invoked)
                 {
