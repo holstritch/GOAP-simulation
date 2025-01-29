@@ -1,7 +1,11 @@
+using UnityEngine;
+
 namespace Actions
 {
     public class GoToWaitingRoomAction : GameAction
     {
+        [SerializeField] protected WorldState postPerformState; // patient waiting
+
         public override bool PrePerform()
         {
             return true;
@@ -9,7 +13,7 @@ namespace Actions
 
         public override bool PostPerform()
         {
-            GameWorld.Instance.GetWorld().ModifyState("Waiting", 1);
+            GameWorld.Instance.GetWorld().ModifyState(postPerformState.stateKeyName, 1);
             GameWorld.Instance.AddPatient(gameObject);
             return true;
         }

@@ -188,8 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7452e1f1226314281449429201d241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldState: {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
   actions: []
   currentAction: {fileID: 0}
+  distanceToCompleteWaypoint: 1
 --- !u!114 &6160599536741111318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,8 +211,7 @@ MonoBehaviour:
   duration: 2
   preConditions: []
   afterEffects:
-  - key: hasArrived
-    value: 1
+  - {fileID: 11400000, guid: 82b47ae8b5bdb424cab053427741d4ef, type: 2}
   agent: {fileID: 0}
   running: 0
 --- !u!114 &9144741863691552997
@@ -231,11 +232,9 @@ MonoBehaviour:
   targetTag: Reception
   duration: 5
   preConditions:
-  - key: hasArrived
-    value: 0
+  - {fileID: 11400000, guid: 82b47ae8b5bdb424cab053427741d4ef, type: 2}
   afterEffects:
-  - key: hasRegistered
-    value: 0
+  - {fileID: 11400000, guid: 7abf03a5f2bf1574babd9f00b47c27d8, type: 2}
   agent: {fileID: 0}
   running: 0
 --- !u!114 &8942820623173987477
@@ -256,13 +255,12 @@ MonoBehaviour:
   targetTag: WaitingArea
   duration: 0
   preConditions:
-  - key: hasRegistered
-    value: 0
+  - {fileID: 11400000, guid: 7abf03a5f2bf1574babd9f00b47c27d8, type: 2}
   afterEffects:
-  - key: isWaiting
-    value: 0
+  - {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
   agent: {fileID: 0}
   running: 0
+  postPerformState: {fileID: 11400000, guid: 2b978b52126d2c3419f8367b899adc2e, type: 2}
 --- !u!195 &6299122676914082097
 NavMeshAgent:
   m_ObjectHideFlags: 0

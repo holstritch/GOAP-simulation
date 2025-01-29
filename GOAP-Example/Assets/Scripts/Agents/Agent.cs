@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Agents
 {
@@ -18,6 +19,8 @@ namespace Agents
     }
     public class Agent : MonoBehaviour
     {
+        [SerializeField] protected WorldState worldState;
+
         public List<GameAction> actions =  new List<GameAction>();
         public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
         public GameAction currentAction;

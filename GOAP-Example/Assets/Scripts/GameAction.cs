@@ -34,13 +34,13 @@ public abstract class GameAction : MonoBehaviour
         if (preConditions != null )
             foreach(WorldState w in preConditions)
             {
-                preConditionsDic.Add(w.key, w.value);
+                preConditionsDic.Add(w.stateKeyName, w.value);
             }
 
         if (afterEffects != null)
             foreach (WorldState w in afterEffects)
             {
-                afterEffectsDic.Add(w.key, w.value);
+                afterEffectsDic.Add(w.stateKeyName, w.value);
             }
     }
 
