@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 6160599536741111318}
   - component: {fileID: 9144741863691552997}
   - component: {fileID: 8942820623173987477}
+  - component: {fileID: 935716807963133239}
   - component: {fileID: 6299122676914082097}
   m_Layer: 0
   m_Name: Patient
@@ -188,10 +189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7452e1f1226314281449429201d241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldState: {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
   actions: []
   currentAction: {fileID: 0}
   distanceToCompleteWaypoint: 1
+  isWaitingState: {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
+  isTreatedState: {fileID: 11400000, guid: 2d1bd1c6fe7fdf14f8312aaae2ca9d21, type: 2}
 --- !u!114 &6160599536741111318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +262,32 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
   agent: {fileID: 0}
   running: 0
-  postPerformState: {fileID: 11400000, guid: 2b978b52126d2c3419f8367b899adc2e, type: 2}
+  patientWaitingState: {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
+  atWaitingRoomState: {fileID: 11400000, guid: ea1d95298cccfa64793e2716bdad7e6b, type: 2}
+--- !u!114 &935716807963133239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d70165a64351346a823ebaa5b28d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Get Treated
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  preConditions:
+  - {fileID: 11400000, guid: ea1d95298cccfa64793e2716bdad7e6b, type: 2}
+  afterEffects:
+  - {fileID: 11400000, guid: 2d1bd1c6fe7fdf14f8312aaae2ca9d21, type: 2}
+  agent: {fileID: 0}
+  running: 0
+  _isTreatedState: {fileID: 11400000, guid: 2d1bd1c6fe7fdf14f8312aaae2ca9d21, type: 2}
 --- !u!195 &6299122676914082097
 NavMeshAgent:
   m_ObjectHideFlags: 0

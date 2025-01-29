@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Actions
 {
     public class GoToWaitingRoomAction : GameAction
     {
-        [SerializeField] protected WorldState postPerformState; // patient waiting
+        [SerializeField] private WorldState patientWaitingState; // change to just grabbing from action post petform
+         // change this to agent belief
+         [SerializeField] private WorldState atWaitingRoomState;
 
         public override bool PrePerform()
         {
@@ -13,8 +16,10 @@ namespace Actions
 
         public override bool PostPerform()
         {
-            GameWorld.Instance.GetWorld().ModifyState(postPerformState.stateKeyName, 1);
+            GameWorld.Instance.GetWorld().ModifyState(patientWaitingState.stateKeyName, 1);
             GameWorld.Instance.AddPatient(gameObject);
+            agentBeliefs.ModifyState(atWaitingRoomState.stateKeyName, 1);
+
             return true;
         }
     

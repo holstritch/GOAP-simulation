@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fe5eaf684fd5464cb28c738decff213, type: 3}
-  m_Name: PatientWaiting
+  m_Name: FreeCubicle
   m_EditorClassIdentifier: 
-  stateKeyName: PatientWaiting
+  stateKeyName: FreeCubicle
   value: 1

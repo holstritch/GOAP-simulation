@@ -19,10 +19,10 @@ namespace Agents
     }
     public class Agent : MonoBehaviour
     {
-        [SerializeField] protected WorldState worldState;
-
         public List<GameAction> actions =  new List<GameAction>();
         public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
+        public GameInventory inventory = new GameInventory();
+        public WorldStates beliefs = new WorldStates();
         public GameAction currentAction;
         public float distanceToCompleteWaypoint = 1f;
     
@@ -86,7 +86,7 @@ namespace Agents
                 foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
                 {
                     // create plan from most important goal
-                    _actionQueue = _planner.Plan(actions, subGoal.Key.SubGoals, null);
+                    _actionQueue = _planner.Plan(actions, subGoal.Key.SubGoals, beliefs);
                     if (_actionQueue != null)
                     {
                         _currentGoal = subGoal.Key;

@@ -18,10 +18,25 @@ public class Node
         this.state = new Dictionary<string, int>(allStates); //copy of allStates dic
         this.action = action;
     }
+    
+    public Node(Node parent, float cost, Dictionary<string, int> allStates, Dictionary<string, int> beliefStates, GameAction action)
+    {
+        this.parent = parent;
+        this.cost = cost;
+        state = new Dictionary<string, int>(allStates); //copy of allStates dic
+        foreach (var belief in beliefStates)
+        {
+            if (!state.ContainsKey(belief.Key))
+            {
+                state.Add(belief.Key, belief.Value);
+            }
+        }
+        this.action = action;
+    }
 }
 public class GamePlanner
 {
-    public Queue<GameAction> Plan(List<GameAction> actions, Dictionary<string, int> goal, WorldStates states)
+    public Queue<GameAction> Plan(List<GameAction> actions, Dictionary<string, int> goal, WorldStates beliefStates)
     {
         // find which action is usable
         List<GameAction> usableActions = new List<GameAction>();
@@ -35,7 +50,7 @@ public class GamePlanner
 
         // create leaf of graph
         List<Node> leaves = new List<Node>();
-        Node start = new Node(null, 0, GameWorld.Instance.GetWorld().GetStates(), null);
+        Node start = new Node(null, 0, GameWorld.Instance.GetWorld().GetStates(), beliefStates.GetStates(), null);
 
         bool success = BuildGraph(start, leaves, usableActions, goal);
 

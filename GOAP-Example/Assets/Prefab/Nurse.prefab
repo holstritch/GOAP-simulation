@@ -101,10 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee04dc68f5b7a9a4781d96398d9b0ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldState: {fileID: 11400000, guid: b34205674dd6dfc4a947bfe17271aca4, type: 2}
   actions: []
   currentAction: {fileID: 0}
   distanceToCompleteWaypoint: 1
+  treatPatientState: {fileID: 11400000, guid: b34205674dd6dfc4a947bfe17271aca4, type: 2}
 --- !u!114 &6902065011407448298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,11 +123,15 @@ MonoBehaviour:
   targetTag: 
   duration: 5
   preConditions:
-  - {fileID: 11400000, guid: 2b978b52126d2c3419f8367b899adc2e, type: 2}
+  - {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
+  - {fileID: 11400000, guid: d813358b2fea3a840999e478b8e7c6a4, type: 2}
   afterEffects:
   - {fileID: 11400000, guid: b34205674dd6dfc4a947bfe17271aca4, type: 2}
   agent: {fileID: 0}
   running: 0
+  _freeCubicleState: {fileID: 11400000, guid: d813358b2fea3a840999e478b8e7c6a4, type: 2}
+  _patientWaitingState: {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
+  atWaitingRoomState: {fileID: 11400000, guid: ea1d95298cccfa64793e2716bdad7e6b, type: 2}
 --- !u!1 &7249749520413077095
 GameObject:
   m_ObjectHideFlags: 0

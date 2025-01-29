@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Agents;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +19,7 @@ public abstract class GameAction : MonoBehaviour
     public Dictionary<string, int> afterEffectsDic;
 
     public WorldStates agentBeliefs;
+    public GameInventory inventory;
 
     public bool running = false;
 
@@ -31,17 +33,25 @@ public abstract class GameAction : MonoBehaviour
     {
         agent = this.gameObject.GetComponent<NavMeshAgent>();
 
-        if (preConditions != null )
+        if (preConditions != null)
+        {
             foreach(WorldState w in preConditions)
             {
                 preConditionsDic.Add(w.stateKeyName, w.value);
             }
-
+        }
+        
         if (afterEffects != null)
+        {
             foreach (WorldState w in afterEffects)
             {
                 afterEffectsDic.Add(w.stateKeyName, w.value);
             }
+        }
+
+        inventory = GetComponent<Agent>().inventory;
+        agentBeliefs = GetComponent<Agent>().beliefs;
+
     }
 
     public bool IsAchieveable()
