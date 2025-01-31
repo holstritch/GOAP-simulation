@@ -23,7 +23,7 @@ public class Node
     {
         this.parent = parent;
         this.cost = cost;
-        state = new Dictionary<string, int>(allStates); //copy of allStates dic
+        state = new Dictionary<string, int>(allStates);
         foreach (var belief in beliefStates)
         {
             if (!state.ContainsKey(belief.Key))
@@ -116,7 +116,7 @@ public class GamePlanner
                 }
 
                 // cost value increases 
-                Node node = new Node (parent, parent.cost + action.cost, currentState, action);
+                Node node = new Node (parent, parent.cost + action.cost, currentState, action); // this contains world & belief states
                 if (GoalAchieved(goal, currentState))
                 {
                     leaves.Add(node);

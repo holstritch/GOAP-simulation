@@ -23,7 +23,7 @@ public class GameWorld
         if (_cubicleQueue.Any())
         {
             //TODO: replace string with reference to world state scriptable obj
-            _world.ModifyState("FreeCubicle", 1);
+            _world.ModifyState("FreeCubicle", cubicles.Length);
         }
     }
     private GameWorld()
@@ -31,9 +31,9 @@ public class GameWorld
 
     }
 
-    public void AddCubicle(GameObject patient)
+    public void AddCubicle(GameObject cubicle)
     {
-        _cubicleQueue.Enqueue(patient);
+        _cubicleQueue.Enqueue(cubicle);
     }
 
     public GameObject RemoveCubicle()

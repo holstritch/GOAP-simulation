@@ -121,7 +121,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: 
-  duration: 5
+  duration: 3
   preConditions:
   - {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
   - {fileID: 11400000, guid: d813358b2fea3a840999e478b8e7c6a4, type: 2}
@@ -131,7 +131,6 @@ MonoBehaviour:
   running: 0
   _freeCubicleState: {fileID: 11400000, guid: d813358b2fea3a840999e478b8e7c6a4, type: 2}
   _patientWaitingState: {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
-  atWaitingRoomState: {fileID: 11400000, guid: ea1d95298cccfa64793e2716bdad7e6b, type: 2}
 --- !u!1 &7249749520413077095
 GameObject:
   m_ObjectHideFlags: 0
