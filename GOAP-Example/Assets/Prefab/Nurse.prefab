@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4047995493616609364}
   - component: {fileID: 2609357030645959627}
   - component: {fileID: 6902065011407448298}
+  - component: {fileID: 8881844723714222446}
   m_Layer: 0
   m_Name: Nurse
   m_TagString: Untagged
@@ -126,11 +127,36 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
   - {fileID: 11400000, guid: d813358b2fea3a840999e478b8e7c6a4, type: 2}
   afterEffects:
-  - {fileID: 11400000, guid: b34205674dd6dfc4a947bfe17271aca4, type: 2}
+  - {fileID: 11400000, guid: 346870a5904762d4e90104e2b68941e2, type: 2}
   agent: {fileID: 0}
   running: 0
   _freeCubicleState: {fileID: 11400000, guid: d813358b2fea3a840999e478b8e7c6a4, type: 2}
   _patientWaitingState: {fileID: 11400000, guid: 41343602a23222241812f7933ac25244, type: 2}
+--- !u!114 &8881844723714222446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618188073631541129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66a5d8b93b0f9874d9759fbaad471e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  preConditions:
+  - {fileID: 11400000, guid: 346870a5904762d4e90104e2b68941e2, type: 2}
+  afterEffects:
+  - {fileID: 11400000, guid: b34205674dd6dfc4a947bfe17271aca4, type: 2}
+  agent: {fileID: 0}
+  running: 0
+  _treatingPatientState: {fileID: 11400000, guid: b34205674dd6dfc4a947bfe17271aca4, type: 2}
+  _freeCubicleState: {fileID: 11400000, guid: d813358b2fea3a840999e478b8e7c6a4, type: 2}
 --- !u!1 &7249749520413077095
 GameObject:
   m_ObjectHideFlags: 0
